@@ -17997,3 +17997,96 @@ Processing by SoundsController#show as HTML
 Completed 200 OK in 15ms (Views: 11.7ms | ActiveRecord: 1.0ms)
 
 
+  [1m[36mActiveRecord::SchemaMigration Load (26.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (26.8ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35m (135.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-4-api_development"[0m
+  [1m[35m (126.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "wdi-project-4-api_test"[0m
+  [1m[35m (443.2ms)[0m  [1m[35mCREATE DATABASE "wdi-project-4-api_development" ENCODING = 'unicode'[0m
+  [1m[35m (273.0ms)[0m  [1m[35mCREATE DATABASE "wdi-project-4-api_test" ENCODING = 'unicode'[0m
+  [1m[35m (11.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7381167824530102995);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20170216121215)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (22.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying, "password_digest" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170216121215"]]
+  [1m[35m (12.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSounds (20170219184944)
+  [1m[35m (6.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (17.2ms)[0m  [1m[35mCREATE TABLE "sounds" ("id" serial primary key, "name" character varying, "genre" character varying, "audio" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170219184944"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateColours (20170220161154)
+  [1m[35m (12.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (40.3ms)[0m  [1m[35mCREATE TABLE "colours" ("id" serial primary key, "sound_id" integer, "name" character varying, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_99153db76a"
+FOREIGN KEY ("sound_id")
+  REFERENCES "sounds" ("id")
+, CONSTRAINT "fk_rails_7940407d04"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_colours_on_sound_id" ON "colours"  ("sound_id")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_colours_on_user_id" ON "colours"  ("user_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170220161154"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateResults (20170222102237)
+  [1m[35m (6.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (20.8ms)[0m  [1m[35mCREATE TABLE "results" ("id" serial primary key, "sound" character varying, "colour" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170222102237"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (6.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-03-08 11:21:38 UTC], ["updated_at", 2017-03-08 11:21:38 UTC]]
+  [1m[35m (11.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(7381167824530102995)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mColour Load (0.7ms)[0m  [1m[34mSELECT "colours".* FROM "colours"[0m
+  [1m[36mSound Load (0.6ms)[0m  [1m[34mSELECT "sounds".* FROM "sounds"[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (6.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ali@alimolloy.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "ali@alimolloy.com"], ["password_digest", "$2a$10$exMUQAXnfbhWRbM1Zm77A.Otx3xlkCsqsJrfJyGGUgIPkY9RuTEn2"], ["created_at", 2017-03-08 11:21:38 UTC], ["updated_at", 2017-03-08 11:21:38 UTC]]
+  [1m[35m (6.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "sounds" ("name", "genre", "audio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Jupiter"], ["genre", "Space"], ["audio", "https://www.nasa.gov/wav/52858main_20010104-ia-a.wav"], ["created_at", 2017-03-08 11:21:38 UTC], ["updated_at", 2017-03-08 11:21:38 UTC]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "sounds" ("name", "genre", "audio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Earth"], ["genre", "Space"], ["audio", "https://www.nasa.gov/wav/52861main_helium_whistle.wav"], ["created_at", 2017-03-08 11:21:38 UTC], ["updated_at", 2017-03-08 11:21:38 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sounds" ("name", "genre", "audio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Whale"], ["genre", "Nature"], ["audio", "http://www.oceanmammalinst.org/songs/hmpback3.wav"], ["created_at", 2017-03-08 11:21:38 UTC], ["updated_at", 2017-03-08 11:21:38 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "sounds" ("name", "genre", "audio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Bird"], ["genre", "Nature"], ["audio", "http://www.wavlist.com/soundfx/010/crow-4.wav"], ["created_at", 2017-03-08 11:21:38 UTC], ["updated_at", 2017-03-08 11:21:38 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "sounds" ("name", "genre", "audio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Comet"], ["genre", "Space"], ["audio", "https://www.nasa.gov/externalflash/interstellar.mp3"], ["created_at", 2017-03-08 11:21:38 UTC], ["updated_at", 2017-03-08 11:21:38 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "sounds" ("name", "genre", "audio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Kepler"], ["genre", "Space"], ["audio", "https://www.nasa.gov/mp3/578359main_kepler_star_KIC7671081B.mp3"], ["created_at", 2017-03-08 11:21:38 UTC], ["updated_at", 2017-03-08 11:21:38 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "sounds" ("name", "genre", "audio", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Saturn"], ["genre", "Space"], ["audio", "https://www.nasa.gov/mp3/584791main_spookysaturn.mp3"], ["created_at", 2017-03-08 11:21:38 UTC], ["updated_at", 2017-03-08 11:21:38 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mSound Load (0.3ms)[0m  [1m[34mSELECT  "sounds".* FROM "sounds" ORDER BY "sounds"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSound Load (0.2ms)[0m  [1m[34mSELECT  "sounds".* FROM "sounds" ORDER BY "sounds"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSound Load (0.2ms)[0m  [1m[34mSELECT  "sounds".* FROM "sounds" ORDER BY "sounds"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mSound Load (0.2ms)[0m  [1m[34mSELECT  "sounds".* FROM "sounds" ORDER BY "sounds"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "colours" ("sound_id", "name", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["sound_id", 1], ["name", "ff69b4"], ["user_id", 1], ["created_at", 2017-03-08 11:21:38 UTC], ["updated_at", 2017-03-08 11:21:38 UTC]]
+  [1m[35m (6.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "colours" ("sound_id", "name", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["sound_id", 7], ["name", "ffffff"], ["user_id", 1], ["created_at", 2017-03-08 11:21:38 UTC], ["updated_at", 2017-03-08 11:21:38 UTC]]
+  [1m[35m (11.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "colours" ("sound_id", "name", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["sound_id", 1], ["name", "fefefe"], ["user_id", 1], ["created_at", 2017-03-08 11:21:38 UTC], ["updated_at", 2017-03-08 11:21:38 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "colours" ("sound_id", "name", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["sound_id", 1], ["name", "bada55"], ["user_id", 1], ["created_at", 2017-03-08 11:21:38 UTC], ["updated_at", 2017-03-08 11:21:38 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
